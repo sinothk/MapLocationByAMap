@@ -1,6 +1,7 @@
 package com.sinothk.map.amap.location;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.amap.api.location.AMapLocationClient;
@@ -20,15 +21,36 @@ import java.util.Date;
  */
 public class AMapLocation {
 
+    private volatile static AMapLocation singleton;
+
+    public static AMapLocation with(@NonNull Context context) {
+        if (singleton == null) {
+            synchronized (AMapLocation.class) {
+                if (singleton == null) {
+                    singleton = new AMapLocation(context);
+                }
+            }
+        }
+        return singleton;
+    }
+
+    private Context mContext;
+    //声明mlocationClient对象
+    AMapLocationClient locationClient;
+
+    public AMapLocation(Context context) {
+        mContext = context;
+    }
+
     /**
      * 单次定位
      *
      * @param mContext
      */
-    public static void location(Context mContext) {
+    public void location(Context mContext, final AMapLocationCallback callback) {
 
         //声明mlocationClient对象
-        AMapLocationClient locationClient = new AMapLocationClient(mContext);
+        locationClient = new AMapLocationClient(mContext);
 
         //声明mLocationOption对象
         AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
@@ -58,24 +80,26 @@ public class AMapLocation {
         locationClient.setLocationListener(new AMapLocationListener() {
             @Override
             public void onLocationChanged(com.amap.api.location.AMapLocation amapLocation) {
-                if (amapLocation != null) {
-                    if (amapLocation.getErrorCode() == 0) {
-                        //定位成功回调信息，设置相关消息
-                        amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                        amapLocation.getLatitude();//获取纬度
-                        amapLocation.getLongitude();//获取经度
-                        amapLocation.getAccuracy();//获取精度信息
-                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        Date date = new Date(amapLocation.getTime());
-                        df.format(date);//定位时间
-
-                    } else {
-                        //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-                        Log.e("AmapError", "location Error, ErrCode:"
-                                + amapLocation.getErrorCode() + ", errInfo:"
-                                + amapLocation.getErrorInfo());
-                    }
-                }
+                callback.complete(AMapLocationEntity.format(amapLocation));
+//                if (amapLocation != null) {
+//                    if (amapLocation.getErrorCode() == 0) {
+//
+//                        //定位成功回调信息，设置相关消息
+//                        amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
+//                        amapLocation.getLatitude();//获取纬度
+//                        amapLocation.getLongitude();//获取经度
+//                        amapLocation.getAccuracy();//获取精度信息
+//                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                        Date date = new Date(amapLocation.getTime());
+//                        df.format(date);//定位时间
+//
+//                    } else {
+//                        //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
+//                        Log.e("AmapError", "location Error, ErrCode:"
+//                                + amapLocation.getErrorCode() + ", errInfo:"
+//                                + amapLocation.getErrorInfo());
+//                    }
+//                }
             }
         });
 
@@ -89,10 +113,10 @@ public class AMapLocation {
      * @param mContext
      * @param second
      */
-    public static void locationContinue(Context mContext, int second) {
+    public void locateContinue(Context mContext, int second, final AMapLocationCallback callback) {
 
         //声明mlocationClient对象
-        AMapLocationClient locationClient = new AMapLocationClient(mContext);
+        locationClient = new AMapLocationClient(mContext);
 
         //声明mLocationOption对象
         AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
@@ -121,28 +145,44 @@ public class AMapLocation {
         locationClient.setLocationListener(new AMapLocationListener() {
             @Override
             public void onLocationChanged(com.amap.api.location.AMapLocation amapLocation) {
-                if (amapLocation != null) {
-                    if (amapLocation.getErrorCode() == 0) {
-                        //定位成功回调信息，设置相关消息
-                        amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                        amapLocation.getLatitude();//获取纬度
-                        amapLocation.getLongitude();//获取经度
-                        amapLocation.getAccuracy();//获取精度信息
-                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        Date date = new Date(amapLocation.getTime());
-                        df.format(date);//定位时间
+                callback.complete(AMapLocationEntity.format(amapLocation));
 
-                    } else {
-                        //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-                        Log.e("AmapError", "location Error, ErrCode:"
-                                + amapLocation.getErrorCode() + ", errInfo:"
-                                + amapLocation.getErrorInfo());
-                    }
-                }
+//                if (amapLocation != null) {
+//                    if (amapLocation.getErrorCode() == 0) {
+//                        //定位成功回调信息，设置相关消息
+//                        amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
+//                        amapLocation.getLatitude();//获取纬度
+//                        amapLocation.getLongitude();//获取经度
+//                        amapLocation.getAccuracy();//获取精度信息
+//                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                        Date date = new Date(amapLocation.getTime());
+//                        df.format(date);//定位时间
+//
+//                        Log.e("AmapSuccess",
+//                                "Latitude:" + amapLocation.getLatitude()
+//                                        + ", Longitude:" + amapLocation.getLongitude()
+//                        );
+//                    } else {
+//                        //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
+//                        Log.e("AmapError", "location Error, ErrCode:"
+//                                + amapLocation.getErrorCode() + ", errInfo:"
+//                                + amapLocation.getErrorInfo());
+//                    }
+//                }
             }
         });
 
         //启动定位
         locationClient.startLocation();
     }
+
+    public void locateStop() {
+        if (locationClient != null) {
+            if (locationClient.isStarted()) {
+                locationClient.stopLocation();//停止定位后，本地定位服务并不会被销毁
+            }
+            locationClient.onDestroy();//销毁定位客户端，同时销毁本地定位服务。
+        }
+    }
+
 }
