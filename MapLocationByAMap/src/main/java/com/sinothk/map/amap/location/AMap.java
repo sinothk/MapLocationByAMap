@@ -2,14 +2,10 @@ package com.sinothk.map.amap.location;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * <pre>
@@ -19,16 +15,15 @@ import java.util.Date;
  *  更新:
  * <pre>
  */
-@Deprecated
-public class AMapLocation {
+public class AMap {
 
-    private volatile static AMapLocation singleton;
+    private volatile static AMap singleton;
 
-    public static AMapLocation with(@NonNull Context context) {
+    public static AMap with(@NonNull Context context) {
         if (singleton == null) {
-            synchronized (AMapLocation.class) {
+            synchronized (AMap.class) {
                 if (singleton == null) {
-                    singleton = new AMapLocation(context);
+                    singleton = new AMap(context);
                 }
             }
         }
@@ -39,7 +34,7 @@ public class AMapLocation {
     //声明mlocationClient对象
     AMapLocationClient locationClient;
 
-    public AMapLocation(Context context) {
+    public AMap(Context context) {
         mContext = context;
     }
 
