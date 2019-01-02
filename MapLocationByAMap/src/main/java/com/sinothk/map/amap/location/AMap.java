@@ -1,5 +1,6 @@
 package com.sinothk.map.amap.location;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
@@ -17,6 +18,7 @@ import com.amap.api.location.AMapLocationListener;
  */
 public class AMap {
 
+    @SuppressLint("StaticFieldLeak")
     private volatile static AMap singleton;
 
     public static AMap with(@NonNull Context context) {
@@ -34,16 +36,16 @@ public class AMap {
     //声明mlocationClient对象
     AMapLocationClient locationClient;
 
-    public AMap(Context context) {
+    private AMap(Context context) {
         mContext = context;
     }
 
     /**
      * 单次定位
      *
-     * @param mContext
+     * @param callback
      */
-    public void location(Context mContext, final AMapLocationCallback callback) {
+    public void location(final AMapLocationCallback callback) {
 
         //声明mlocationClient对象
         locationClient = new AMapLocationClient(mContext);
@@ -106,10 +108,9 @@ public class AMap {
     /**
      * 连续定位
      *
-     * @param mContext
      * @param second
      */
-    public void locateContinue(Context mContext, int second, final AMapLocationCallback callback) {
+    public void locateContinue(int second, final AMapLocationCallback callback) {
 
         //声明mlocationClient对象
         locationClient = new AMapLocationClient(mContext);
