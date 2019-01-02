@@ -108,7 +108,7 @@ public class AMap {
     /**
      * 连续定位
      *
-     * @param second
+     * @param second 单位：秒
      */
     public void locateContinue(int second, final AMapLocationCallback callback) {
 
