@@ -20,19 +20,19 @@ MapLocationByAMap
       
  # 使用   
  
-      //        AMapLocation.with(this).location(this, new AMapLocationCallback() {
-      //
-      //            @Override
-      //            public void complete(AMapLocationEntity locEntity) {
-      //                if (locEntity.getCode() == 0) {
-      //
-      //                } else {
-      //
-      //                }
-      //            }
-      //        });
+      AMapLocationHelper.with(this).location(new AMapLocationCallback() {
 
-        AMapLocation.with(this).locateContinue(this, 3, new AMapLocationCallback() {
+            @Override
+            public void complete(AMapLocationEntity locEntity) {
+                if (locEntity.getCode() == 0) {
+
+                } else {
+
+                }
+            }
+        });
+
+        AMapLocationHelper.with(this).locateContinue(3, new AMapLocationCallback() {
             @Override
             public void complete(AMapLocationEntity locEntity) {
                 if (locEntity.getCode() == 0) {
@@ -49,7 +49,7 @@ MapLocationByAMap
                 try {
                     Thread.sleep(12 * 1000);
 
-                    AMapLocation.with(LocationDemoMainActivity.this).locateStop();
+                    AMapLocationHelper.with(LocationDemoMainActivity.this).locateStop();
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
