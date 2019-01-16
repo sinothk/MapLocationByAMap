@@ -16,16 +16,16 @@ import com.amap.api.location.AMapLocationListener;
  *  更新:
  * <pre>
  */
-public class MapHelper {
+public class AMapLocationHelper {
 
     @SuppressLint("StaticFieldLeak")
-    private volatile static MapHelper singleton;
+    private volatile static AMapLocationHelper singleton;
 
-    public static MapHelper with(@NonNull Context context) {
+    public static AMapLocationHelper with(@NonNull Context context) {
         if (singleton == null) {
-            synchronized (MapHelper.class) {
+            synchronized (AMapLocationHelper.class) {
                 if (singleton == null) {
-                    singleton = new MapHelper(context);
+                    singleton = new AMapLocationHelper(context);
                 }
             }
         }
@@ -36,7 +36,7 @@ public class MapHelper {
     //声明mlocationClient对象
     AMapLocationClient locationClient;
 
-    private MapHelper(Context context) {
+    private AMapLocationHelper(Context context) {
         mContext = context;
     }
 
