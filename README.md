@@ -21,16 +21,16 @@ MapLocationByAMap
  # 使用   
  
       //        AMapLocation.with(this).location(this, new AMapLocationCallback() {
-//
-//            @Override
-//            public void complete(AMapLocationEntity locEntity) {
-//                if (locEntity.getCode() == 0) {
-//
-//                } else {
-//
-//                }
-//            }
-//        });
+      //
+      //            @Override
+      //            public void complete(AMapLocationEntity locEntity) {
+      //                if (locEntity.getCode() == 0) {
+      //
+      //                } else {
+      //
+      //                }
+      //            }
+      //        });
 
         AMapLocation.with(this).locateContinue(this, 3, new AMapLocationCallback() {
             @Override
