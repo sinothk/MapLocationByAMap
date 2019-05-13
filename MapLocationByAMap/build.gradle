@@ -33,4 +33,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     api files('libs/AMap_Location_V4.4.0_20181122.jar')
+    //3D地图so及jar
+    implementation 'com.amap.api:3dmap:6.7.0'
 }
