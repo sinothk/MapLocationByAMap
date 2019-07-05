@@ -243,4 +243,30 @@ public class AMapLocationEntity {
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+    @Override
+    public String toString() {
+        return "AMapLocationEntity{" +
+                "locationType=" + locationType +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", accuracy=" + accuracy +
+                ", address='" + address + '\'' +
+                ", country='" + country + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", district='" + district + '\'' +
+                ", street='" + street + '\'' +
+                ", streetNum='" + streetNum + '\'' +
+                ", cityCode='" + cityCode + '\'' +
+                ", adCode='" + adCode + '\'' +
+                ", aoiName='" + aoiName + '\'' +
+                ", buildingId='" + buildingId + '\'' +
+                ", floor='" + floor + '\'' +
+                ", gpsAccuracyStatus=" + gpsAccuracyStatus +
+                ", locationTime=" + locationTime +
+                ", code=" + code +
+                ", msg='" + msg + '\'' +
+                '}';
+    }
 }

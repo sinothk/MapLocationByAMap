@@ -2,24 +2,27 @@ package com.sinothk.map.amap.location.demo;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.sinothk.map.amap.location.AMapLocationCallback;
 import com.sinothk.map.amap.location.AMapLocationEntity;
 import com.sinothk.map.amap.location.MapLocationHelper;
 
 public class LocationDemoMainActivity extends AppCompatActivity {
+    String TAG = LocationDemoMainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_demo_main);
 
+
         MapLocationHelper.with(this).location(new AMapLocationCallback() {
 
             @Override
             public void complete(AMapLocationEntity locEntity) {
                 if (locEntity.getCode() == 0) {
-
+                    Log.e(TAG, locEntity.toString());
                 } else {
 
                 }
@@ -30,7 +33,7 @@ public class LocationDemoMainActivity extends AppCompatActivity {
             @Override
             public void complete(AMapLocationEntity locEntity) {
                 if (locEntity.getCode() == 0) {
-
+                    Log.e(TAG, locEntity.toString());
                 } else {
 
                 }
