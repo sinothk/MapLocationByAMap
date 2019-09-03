@@ -14,7 +14,7 @@ MapLocationByAMap
 ## Step 2. Add the dependency
 
       dependencies {
-              implementation 'com.github.sinothk:MapLocationByAMap:1.0.0102'
+              implementation 'com.github.sinothk:MapLocationByAMap:2.19.0903'
       }
       
       
