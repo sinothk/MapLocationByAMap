@@ -3,6 +3,7 @@ package com.sinothk.map.amap.location.demo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.sinothk.map.amap.location.AMapLocationCallback;
 import com.sinothk.map.amap.location.AMapLocationEntity;
@@ -16,7 +17,6 @@ public class LocationDemoMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_demo_main);
 
-
         MapLocationHelper.with(this).location(new AMapLocationCallback() {
 
             @Override
@@ -28,6 +28,10 @@ public class LocationDemoMainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void locBtn(View view) {
+
 
         MapLocationHelper.with(this).locateContinue(3, new AMapLocationCallback() {
             @Override
