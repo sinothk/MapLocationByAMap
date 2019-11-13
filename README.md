@@ -28,7 +28,7 @@ MapLocationByAMap
       <!-- 定位需要的服务 -->
       <service android:name="com.amap.api.location.APSService" />
  
-      AMapLocationHelper.with(this).location(new AMapLocationCallback() {
+      MapLocationHelper.with(this).location(new AMapLocationCallback() {
 
             @Override
             public void complete(AMapLocationEntity locEntity) {
@@ -40,7 +40,7 @@ MapLocationByAMap
             }
         });
 
-        AMapLocationHelper.with(this).locateContinue(3, new AMapLocationCallback() {
+        MapLocationHelper.with(this).locateContinue(3, new AMapLocationCallback() {
             @Override
             public void complete(AMapLocationEntity locEntity) {
                 if (locEntity.getCode() == 0) {
@@ -57,7 +57,7 @@ MapLocationByAMap
                 try {
                     Thread.sleep(12 * 1000);
 
-                    AMapLocationHelper.with(LocationDemoMainActivity.this).locateStop();
+                    MapLocationHelper.with(LocationDemoMainActivity.this).locateStop();
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
