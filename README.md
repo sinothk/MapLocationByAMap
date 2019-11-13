@@ -20,6 +20,14 @@ MapLocationByAMap
       
  # 使用   
  
+      <!--开发者申请的key-->
+      <meta-data
+          android:name="com.amap.api.v2.apikey"
+          android:value="***" />
+
+      <!-- 定位需要的服务 -->
+      <service android:name="com.amap.api.location.APSService" />
+ 
       AMapLocationHelper.with(this).location(new AMapLocationCallback() {
 
             @Override
